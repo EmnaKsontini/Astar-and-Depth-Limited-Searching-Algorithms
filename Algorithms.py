@@ -121,16 +121,12 @@ def genereOperateursApplicables(base_des_regles,base_des_faits):
     return LogFile,conclusions
 
 def getNewFactsForAppliedRules(base_des_regles,base_des_faits) :
-    #print(base_des_faits[0])
     LogFile,conclusions=genereOperateursApplicables(base_des_regles,base_des_faits)
     for i in range(0,len(conclusions)):
         for j in range(0, len(conclusions[i].expression)):
             if "+" in str(conclusions[i].expression[j]) or "-" in str(conclusions[i].expression[j])  or "*" in str(conclusions[i].expression[j])  or "/" in str(conclusions[i].expression[j])   :
-                #print("eval", conclusions[i])
                 conclusions[i].expression[j]=str(eval(conclusions[i].expression[j]))
-                #print("after eval" ,conclusions[i] )
         regex = re.sub(r"\s*(\d+)", r"\1",str(conclusions[i].expression))
-        #print("regex",regex)
         conclusions[i]=Expression(eval(regex))
 
     return conclusions
@@ -183,17 +179,13 @@ def astar(base_des_regles, start, end , heristic):
     end_node = Node(None, end)
     end_node.g = end_node.h = end_node.f = 0
 
-    # Initialize both open and closed list
     open_list = []
     closed_list = []
 
-    # Add the start node
     open_list.append(start_node)
 
-    # Loop until you find the end
     while len(open_list) > 0:
 
-        # Get the current node
         current_node = open_list[0]
         current_index = 0
         for index, item in enumerate(open_list):
@@ -205,16 +197,14 @@ def astar(base_des_regles, start, end , heristic):
         open_list.pop(current_index)
         closed_list.append(current_node)
 
-        # Found the goal
         if Unifcation.unifier(current_node.position,end_node.position) != None:
             path = []
             current = current_node
             while current is not None:
                 path.append(current.position)
                 current = current.parent
-            return path[::-1] # Return reversed path
+            return path[::-1] 
 
-        # Generate children
         children= []
         liste = [Fait(current_node.position)]
         childrens = getNewFactsForAppliedRules(base_des_regles,liste)
@@ -524,9 +514,6 @@ def main():
 
 
         
-#    parse_file("TP1.txt",base_des_regles,base_des_faits)
-#    path = astar(base_des_regles,base_des_faits[0], Expression(eval("['cruchesAetB','2','?n']")))
-    #for e in path ['MetC','0','0','0'] :
-        #print(e)p(?x,f(g(?y,a)),a)p(?z,f(?z),a)
+
 if __name__ == "__main__":
     main()
