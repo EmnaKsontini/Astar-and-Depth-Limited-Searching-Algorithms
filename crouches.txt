@@ -1,0 +1,12 @@
+cruchesAetB(2,0)
+
+si cruchesAetB(?x, ?y) et ?x <4 alors cruchesAetB (4, ?y) 
+Si cruchesAetB(?x, ?y) et ?y<3 alors cruchesAetB (?x, 3) 
+Si cruchesAetB (?x, ?y) et ?x ? 0 alors cruchesAetB (0, ?y) 
+Si cruchesAetB (?x, ?y) et ?y ? 0 alors cruchesAetB (?x, 0) 
+Si cruchesAetB (?x, ?y) et ?x + ?y ? 4 et ?y ? 0 alors cruchesAetB (4, ?y - (4 - ?x))
+Si cruchesAetB (?x, ?y) et ?x + ?y ? 3 et ?x ? 0  alors cruchesAetB (?x - (3 - ?y), 3)
+Si cruchesAetB (?x, ?y) et ?x + ?y ? 4 et ?y ? 0 alors cruchesAetB (?x + ?y, 0) 
+Si cruchesAetB (?x, ?y) et ?x + ?y ? 3, ?x ? 0 alors  cruchesAetB (0, ?x + ?y) 
+Si cruchesAetB (0, 2) alors cruchesAetB (2, 0) 
+Si cruchesAetB (2, ?y) alors cruchesAetB (0, ?y) 
